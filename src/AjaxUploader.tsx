@@ -149,11 +149,18 @@ class AjaxUploader extends Component<UploadProps> {
       }
     }
 
+
     // Get latest action
     const { action } = this.props;
     let mergedAction: string;
     if (typeof action === 'function') {
-      mergedAction = await action(file);
+      if ( transformedFile instanceof File) {
+        // @ts-expect-error
+        mergedAction = await action(transformedFile);
+       } else {
+        mergedAction = await action(file);
+       }
+
     } else {
       mergedAction = action;
     }
@@ -166,14 +173,13 @@ class AjaxUploader extends Component<UploadProps> {
     } else {
       mergedData = data;
     }
-
     const parsedData =
-      // string type is from legacy `transformFile`.
-      // Not sure if this will work since no related test case works with it
-      (typeof transformedFile === 'object' || typeof transformedFile === 'string') &&
-      transformedFile
-        ? transformedFile
-        : file;
+    // string type is from legacy `transformFile`.
+    // Not sure if this will work since no related test case works with it
+    (typeof transformedFile === 'object' || typeof transformedFile === 'string') &&
+    transformedFile
+      ? transformedFile
+      : file;
 
     let parsedFile: File;
     if (parsedData instanceof File) {
