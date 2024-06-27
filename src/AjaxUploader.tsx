@@ -154,6 +154,7 @@ class AjaxUploader extends Component<UploadProps> {
     const { action } = this.props;
     let mergedAction: string;
     if (typeof action === 'function') {
+      console.log('transformedFile-->',transformedFile,file,transformedFile instanceof File)
       if ( transformedFile instanceof File) {
         // @ts-expect-error
         mergedAction = await action(transformedFile);

@@ -1,5 +1,5 @@
 {
-  "name": "rc-upload-flow",
+  "name": "@xunhou/rc-upload",
   "version": "4.5.3",
   "description": "upload ui component for react",
   "keywords": [
@@ -72,5 +72,8 @@
   "peerDependencies": {
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
