@@ -170,7 +170,14 @@ class AjaxUploader extends Component<UploadProps> {
     const { data } = this.props;
     let mergedData: Record<string, unknown>;
     if (typeof data === 'function') {
-      mergedData = await data(file);
+      console.log('transformedFile-->data',transformedFile,file,transformedFile instanceof File)
+      if ( transformedFile instanceof File) {
+        mergedData = await data(transformedFile);
+       } else {
+        mergedData = await data(file);
+       }
+
+
     } else {
       mergedData = data;
     }
